@@ -1,0 +1,16 @@
+/* .pink {
+  color: hotpink;
+} */
+/* 
+html:has(option [value="2015"]:checked) ~ p {
+  color: blue;
+} */
+
+/* If a certain year is selected, change the color of p */
+/* <select id="year-select">
+      <option value="">All</option>
+      <option value="2013">2013</option>
+      <option value="2014">2014</option> */
+/* #year-select option[value="2013"]:checked ~ p {
+    color: blue;
+    } */

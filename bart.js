@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
             allData = data; // Store fetched data
             displaySpeakers(data); // Display all speakers
             updateCountryOptions(data); // Update the country options
+            updateYearColors(data); // Update the year colors
+
         })
         .catch(error => {
             console.error('Error fetching data:', error); // Show the error in the console
@@ -68,37 +70,49 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('year-select').addEventListener('change', () => {
         const selectedYear = document.getElementById('year-select').value;
+        const color = yearColors[selectedYear] || 'red';
+        document.querySelectorAll('p').forEach(p => {
+            p.style.color = color;
+        });
+
         updateCountryOptions(allData, selectedYear);
         // Optioneel: Reset ook de huidige landselectie
         document.getElementById('country-select').value = '';
         // En voer de filterfunctie opnieuw uit om de sprekers te filteren op basis van het nieuwe jaar
-        const selectedCountry = document.getElementById('country-select').value;
-        filterSpeakers(allData, selectedYear, selectedCountry);
+        // const selectedCountry = document.getElementById('country-select').value;
+        // filterSpeakers(allData, selectedYear, selectedCountry);
     });
 
 
 
-
-    // Event listener for the filter button
-    document.getElementById('filter-button').addEventListener('click', () => {
-        const selectedYear = document.getElementById('year-select').value;
-        // const filteredSpeakers = selectedYear ? allData.filter(speaker => speaker.year && speaker.year.toString() === selectedYear) : allData;
-        const filteredSpeakers = selectedYear ? allData.filter(speaker => speaker.edition && speaker.edition.year.toString() === selectedYear) : allData;
-
-        displaySpeakers(filteredSpeakers);
-    });
 
     document.getElementById('filter-button').addEventListener('click', () => {
         const selectedYear = document.getElementById('year-select').value;
         const selectedCountry = document.getElementById('country-select').value;
 
         const filteredSpeakers = allData.filter(speaker => {
-            const matchesYear = selectedYear ? speaker.edition && speaker.edition.year.toString() === selectedYear : true;
-            const matchesCountry = selectedCountry ? speaker.country === selectedCountry : true;
+            const matchesYear = !selectedYear || (speaker.edition && speaker.edition.year.toString() === selectedYear);
+            const matchesCountry = !selectedCountry || speaker.country === selectedCountry;
             return matchesYear && matchesCountry;
         });
 
         displaySpeakers(filteredSpeakers);
     });
+
+
+
+    let yearColors = {}; // Globaal object om jaren en hun kleuren op te slaan
+
+    function updateYearColors(data) {
+        yearColors = data.reduce((acc, speaker) => {
+            if (speaker.edition && speaker.edition.year && speaker.edition.color && speaker.edition.color.hex) {
+                acc[speaker.edition.year] = speaker.edition.color.hex;
+            }
+            return acc;
+        }, {});
+    }
+
+
+
 
 });
