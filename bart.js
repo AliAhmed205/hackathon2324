@@ -9,11 +9,29 @@ document.addEventListener('DOMContentLoaded', function () {
             displaySpeakers(data); // Display all speakers
             updateCountryOptions(data); // Update the country options
             updateYearColors(data); // Update the year colors
+            updateYearOptions(data);
 
         })
         .catch(error => {
             console.error('Error fetching data:', error); // Show the error in the console
         });
+
+
+    function updateYearOptions(data) {
+        const yearSelect = document.getElementById('year-select');
+        const allYears = data.map(speaker => speaker.edition.year)
+            .filter((year, index, self) => year && self.indexOf(year) === index)
+            .sort((a, b) => a - b); // Sorteer jaren in oplopende volgorde
+
+        yearSelect.innerHTML = '<option value="">All</option>'; // Reset en voeg de 'All' optie toe
+
+        allYears.forEach(year => {
+            const option = document.createElement('option');
+            option.value = option.textContent = year;
+            yearSelect.appendChild(option);
+        });
+    }
+
 
     // Display speakers in the HTML
     function displaySpeakers(data) {
