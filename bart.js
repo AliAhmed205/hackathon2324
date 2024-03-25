@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             allData = data; // Store fetched data
             displaySpeakers(data); // Display all speakers
+            updateCountryOptions(data); // Update the country options
         })
         .catch(error => {
             console.error('Error fetching data:', error); // Show the error in the console
@@ -41,6 +42,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
         speakersContainer.appendChild(speakersList);
     }
+
+    // dynamic years
+    function updateCountryOptions(data, selectedYear) {
+        const countrySelect = document.getElementById('country-select');
+        let filteredData = data;
+
+        // Als er een jaar geselecteerd is, filter dan de data op basis van dat jaar
+        if (selectedYear) {
+            filteredData = data.filter(speaker => speaker.edition && speaker.edition.year.toString() === selectedYear);
+        }
+
+        const allCountries = filteredData.map(speaker => speaker.country)
+            .filter((value, index, self) => self.indexOf(value) === index)
+            .sort();
+
+        countrySelect.innerHTML = '<option value="">All</option>'; // Reset en voeg de 'All' optie toe
+
+        allCountries.forEach(country => {
+            const option = document.createElement('option');
+            option.value = option.textContent = country;
+            countrySelect.appendChild(option);
+        });
+    }
+
+    document.getElementById('year-select').addEventListener('change', () => {
+        const selectedYear = document.getElementById('year-select').value;
+        updateCountryOptions(allData, selectedYear);
+        // Optioneel: Reset ook de huidige landselectie
+        document.getElementById('country-select').value = '';
+        // En voer de filterfunctie opnieuw uit om de sprekers te filteren op basis van het nieuwe jaar
+        const selectedCountry = document.getElementById('country-select').value;
+        filterSpeakers(allData, selectedYear, selectedCountry);
+    });
+
+
+
 
     // Event listener for the filter button
     document.getElementById('filter-button').addEventListener('click', () => {
