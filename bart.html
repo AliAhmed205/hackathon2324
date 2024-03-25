@@ -3,9 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Filter</title>
+    <title>Speaker Filter</title>
   </head>
   <body>
-    <h1>bart</h1>
+    <h1>Speakers</h1>
+    <label for="year-select">Filter by Year:</label>
+    <select id="year-select">
+      <option value="">Alles</option>
+      <option value="2013">2013</option>
+      <option value="2014">2014</option>
+      <option value="2015">2015</option>
+      <option value="2016">2016</option>
+      <option value="2017">2017</option>
+      <option value="2018">2018</option>
+      <option value="2019">2019</option>
+      <option value="2022">2022</option>
+      <option value="2023">2023</option>
+      <option value="2024">2024</option>
+    </select>
+
+    <label for="country-select">Filter by Country:</label>
+    <select id="country-select">
+      <option value="">All</option>
+      <option value="US">US</option>
+      <option value="UK">UK</option>
+      <option value="NL">NL</option>
+    </select>
+
+    <button id="filter-button">Filter</button>
+
+    <div id="speakers-container"></div>
+
+    <script src="./bart.js"></script>
   </body>
 </html>
