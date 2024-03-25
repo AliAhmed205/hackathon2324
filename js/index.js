@@ -11,8 +11,22 @@ function createSymbolElement(symbol) {
     return div;
 }
 
+// make a function that will be called when the lever is clicked, add a class to the button and remove it when the animation is done
+// add a class to the button when the animation is done
+const lever = document.getElementById('lever');
+
+lever.addEventListener('click', () => {
+    lever.classList.add('spinning');
+    setTimeout(() => {
+        lever.classList.remove('spinning');
+    }, 800);
+})
+
+
+
 let spun = false;
 function spin() {
+
     if (spun) {
         reset();
     }
@@ -24,9 +38,9 @@ function spin() {
         const symbolHeight = symbols.querySelector('.symbol')?.clientHeight;
         const symbolCount = symbols.childElementCount;
 
-        symbols.innerHTML = '';
+        // symbols.innerHTML = '';
 
-        symbols.appendChild(createSymbolElement('❓'));
+        // symbols.appendChild(createSymbolElement('❓'));
 
         for (let i = 0; i < 3; i++) {
             slotSymbols[index].forEach(symbol => {
@@ -35,7 +49,7 @@ function spin() {
         }
 
         const totalDistance = symbolCount * symbolHeight;
-        const randomOffset = -Math.floor(Math.random() * (symbolCount - 1) + 1) * symbolHeight;
+        const randomOffset = -Math.floor(Math.random() * symbolCount) * symbolHeight;
         symbols.style.top = `${randomOffset}px`;
 
         symbols.addEventListener('transitionend', () => {
@@ -67,8 +81,9 @@ function logDisplayedSymbols() {
 
     slots.forEach((slot, index) => {
         const symbols = slot.querySelector('.symbols');
-        const symbolIndex = Math.floor(Math.abs(parseInt(symbols.style.top, 10)) / slot.clientHeight) % slotSymbols[index].length;
-        const displayedSymbol = slotSymbols[index][symbolIndex];
+        const symbolIndex = Math.abs(parseInt(symbols.style.top, 10)) / slot.clientHeight;
+        const displayedSymbolIndex = Math.round(symbolIndex) % slotSymbols[index].length;
+        const displayedSymbol = slotSymbols[index][displayedSymbolIndex];
         displayedSymbols.push(displayedSymbol);
     });
 

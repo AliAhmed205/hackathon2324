@@ -42,9 +42,11 @@ body {
     height: 150px;
     font-size: 60px;
     line-height: 100px;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding-top: 25px;
+    /* padding-top: 25px; */
 }
 
 button {
@@ -57,25 +59,28 @@ button {
     & div{
         background-color: red;
         background: rgb(187,119,3);
-        background: linear-gradient(0deg, rgba(187, 119, 3, 1) 0%, rgb(201 145 21) 17%, rgb(226 163 66) 25%, rgba(255, 216, 45, 1) 66%, rgb(255 245 187) 80%, rgba(254, 223, 90, 1) 100%);
+        background-image: linear-gradient(0deg, rgba(187, 119, 3, 1) 0%, rgb(201 145 21) 17%, rgb(226 163 66) 25%, rgba(255, 216, 45, 1) 66%, rgb(255 245 187) 80%, rgba(254, 223, 90, 1) 100%);
         height: 3em;
         width: 1.5em;
         position: relative;
         cursor: pointer;
         border-radius: 0 40% 40% 0;
+        transition: all 0.3s;
 
         &::before{
             content: '';
             background-color: yellow;
             height: 4em;
             width: 0.3em;
-            right: 0.3em;
+            right: 0.4em;
             position: absolute;
             top: -3.5em;
             background: rgb(187,119,3);
         background: linear-gradient(0deg, rgba(187, 119, 3, 1) 0%, rgb(201 145 21) 17%, rgb(226 163 66) 25%, rgba(255, 216, 45, 1) 66%, rgb(255 245 187) 80%, rgba(254, 223, 90, 1) 100%);
             border-radius: 0 0 30% 30%;
             transform: rotate(9deg);
+            transform-origin: bottom center;
+            transition: all 0.3s;
         }
 
         &::after{
@@ -83,14 +88,30 @@ button {
             background-color: green;
             height: 2em;
             width: 2em;
-            left: 0.35em;
+            left: 0.55em;
             position: absolute;
             top: -4em;
             border-radius: 50%;
             background: radial-gradient(35% 25% at 50% 25%, rgb(255 168 168) 20%, rgb(165 145 145 / 0%)), radial-gradient(1em 0.75em at 32% 75%, rgb(245 112 112), rgba(102, 102, 102, 0)), radial-gradient(1em 0.75em at 65% 78%, rgb(176 2 2), rgba(102, 102, 102, 0)), radial-gradient(100% 100% at center, rgb(213 43 43) 49.5%, rgba(68, 68, 68, 0) 50%);
+            transition: all 0.3s;
+        }
+    }
+
+    &.spinning{
+        & div{
+            &::before{
+                top: 0em;
+                height: 1em;
+                transform: rotateX(80deg);
+            }
+            &::after{
+                top: 0em;
+                left: 0.65em;
+            }
         }
     }
 }
+
 
 
 
