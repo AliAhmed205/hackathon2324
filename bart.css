@@ -14,3 +14,6 @@ html:has(option [value="2015"]:checked) ~ p {
 /* #year-select option[value="2013"]:checked ~ p {
     color: blue;
     } */
+svg {
+  transition: 0.5s;
+}

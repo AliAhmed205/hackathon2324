@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     let allData = []; // Store all the fetched data 
+    let yearColors = {};
 
     // Fetch data from the JSON link
     fetch('https://cssday.nl/data/speakers.json')
@@ -15,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => {
             console.error('Error fetching data:', error); // Show the error in the console
         });
-
 
     function updateYearOptions(data) {
         const yearSelect = document.getElementById('year-select');
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    // Display speakers in the HTML
+
     function displaySpeakers(data) {
         const speakersContainer = document.getElementById('speakers-container');
         speakersContainer.innerHTML = ''; // Clear previous data
@@ -86,22 +86,27 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    function updateYearColors(data) {
+        yearColors = data.reduce((acc, speaker) => {
+            if (speaker.edition && speaker.edition.year && speaker.edition.color && speaker.edition.color.hex) {
+                acc[speaker.edition.year] = speaker.edition.color.hex;
+            }
+            return acc;
+        }, {});
+    }
+
+
     document.getElementById('year-select').addEventListener('change', () => {
         const selectedYear = document.getElementById('year-select').value;
-        const color = yearColors[selectedYear] || 'red';
-        document.querySelectorAll('p').forEach(p => {
-            p.style.color = color;
+        const fill = yearColors[selectedYear];
+        document.querySelectorAll('svg').forEach(svg => {
+            svg.style.fill = fill;
         });
 
         updateCountryOptions(allData, selectedYear);
-        // Optioneel: Reset ook de huidige landselectie
         document.getElementById('country-select').value = '';
-        // En voer de filterfunctie opnieuw uit om de sprekers te filteren op basis van het nieuwe jaar
-        // const selectedCountry = document.getElementById('country-select').value;
-        // filterSpeakers(allData, selectedYear, selectedCountry);
+
     });
-
-
 
 
     document.getElementById('filter-button').addEventListener('click', () => {
@@ -116,21 +121,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
         displaySpeakers(filteredSpeakers);
     });
-
-
-
-    let yearColors = {}; // Globaal object om jaren en hun kleuren op te slaan
-
-    function updateYearColors(data) {
-        yearColors = data.reduce((acc, speaker) => {
-            if (speaker.edition && speaker.edition.year && speaker.edition.color && speaker.edition.color.hex) {
-                acc[speaker.edition.year] = speaker.edition.color.hex;
-            }
-            return acc;
-        }, {});
-    }
-
-
-
 
 });
