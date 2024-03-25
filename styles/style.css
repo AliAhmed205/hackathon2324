@@ -10,5 +10,73 @@ html {
 }
 
 body {
-    background-color: red;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    font-family: "Helvetica Now Display", sans-serif;
+}
+
+img {
+    margin: 0 auto;
+}
+
+li {
+    list-style-type: none;
+}
+
+div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+
+    div {
+        border: 10px solid black;
+        border-radius: 1rem;
+        width: 10rem;
+        height: 10rem;
+        overflow: hidden;
+
+        ul {
+
+            li {
+                padding: 1rem 0;
+                margin: 1rem;
+                font-size: 2rem;
+            }
+        }
+    }
+}
+
+button {
+    background-color: hotpink;
+    border: 1px solid hotpink;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .3s;
+
+    &:hover {
+        transform: translateY(-10%);
+        box-shadow: 0 4px 0 #000;
+    }
+}
+
+@keyframes slideSlot {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+.slide-animation {
+    animation: slideSlot 1s ease-in-out forwards;
 }
