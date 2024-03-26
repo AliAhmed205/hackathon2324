@@ -34,3 +34,6 @@
 
 <img width="864" alt="Scherm­afbeelding 2024-03-26 om 11 24 55" src="https://github.com/AliAhmed205/hackathon2324/assets/118130116/0a4912d4-5ba5-4b13-9e8e-9a81eba0bbad">
 
+### Vervolg
+
+<p>Na het bespreken van wat het meest effectief leek, gaven we de voorkeur aan de <b>CSS Slotmachine</b>. Nu moesten we beslissen wat er daarna moest gebeuren. De gebruiker trekt aan de hendel van de gokautomaat, maar wat gebeurt er vervolgens? Verandert de gebruikersinterface volledig? Wordt er ergens naar beneden gescrold of worden we naar een andere pagina geleid? Dit was de volgende stap in ons proces, dus besloten we opnieuw een aantal ideeën te schetsen.</p>
