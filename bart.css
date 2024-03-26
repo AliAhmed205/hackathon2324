@@ -53,19 +53,4 @@ img {
   /* margin-left: 1.4rem; */
 }
 
-.container {
-  position: relative;
-}
 
-.img,
-.svg-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%; /* Adjust as necessary */
-  height: auto; /* Adjust as necessary */
-}
-
-.svg-overlay {
-  z-index: 10; /* Ensure SVG is above the image */
-}
