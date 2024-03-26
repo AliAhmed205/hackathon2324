@@ -49,19 +49,11 @@ document.addEventListener('DOMContentLoaded', function () {
         data.forEach(speaker => {
             const speakerItem = document.createElement('li');
 
-            // const svgMarkup = `<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 233.16 262.3">
-            // <defs>
-            // <style>
-            //       .cls-1 {
-            //         fill: #265aa6;
-            //         stroke-width: 0px;
-            //       }
-            // </style>
-            // </defs>
-            // <polygon class="cls-1" points="211.3 236.8 116.58 262.3 21.86 236.8 0 0 233.16 0 211.3 236.8"/>
-            // </svg>`;
 
-            // speakerItem.innerHTML = svgMarkup;
+
+            // Append to an existing list
+            // document.querySelector('ul').appendChild(speakerItem);
+
 
 
             let speakerName = document.createElement('h2');
@@ -70,11 +62,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Create an avatar image
             const avatarImage = document.createElement('img');
+            avatarImage.style.clipPath = 'url(#customClip)';
             // image of the speaker
             avatarImage.src = speaker.avatar;
             // alt text
             avatarImage.alt = speaker.name;
 
+
+            // avatarImage.style.clipPath = 'url(#customClip)';
 
             const speakerTitle = document.createElement('h3');
             speakerTitle.textContent = speaker.talk.title;
