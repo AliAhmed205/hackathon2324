@@ -1,0 +1,180 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+:root {
+    --svg-color: lightskyblue;
+}
+
+
+
+
+body {
+    background-color: hsla(0, 0%, 0%, 1);
+    background-image:
+        radial-gradient(at 51% 51%, hsla(266, 54%, 13%, 1) 0px, transparent 50%),
+        radial-gradient(at 94% 87%, hsla(265, 77%, 16%, 1) 0px, transparent 50%),
+        radial-gradient(at 0% 0%, hsla(254, 100%, 18%, 1) 0px, transparent 50%);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#svg-container-logo {
+    --width: max(20vw, 5em);
+
+    position: relative;
+    width: var(--width);
+
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: calc(var(--width) * .05);
+
+    animation: sizeIncrease 1s 1s backwards;
+}
+
+/* CSS and DAY */
+#svg-container-logo svg {
+    width: 100%;
+    display: block;
+}
+
+#svg-container-logo svg:nth-of-type(1) {
+    grid-column: 1/-1;
+    grid-row: 1;
+
+    animation: titleDown .5s 2s ease-out backwards;
+}
+
+#svg-container-logo svg:nth-of-type(2) {
+    grid-column: 1/-1;
+    grid-row: 3;
+
+    animation: titleUp .5s 2s ease-out backwards;
+}
+
+svg path {
+    fill: white;
+    transition: fill 1s;
+}
+
+
+svg path {
+    animation: ChangeColor 2s 5s ease-out forwards;
+}
+
+
+/* drie blokken */
+#svg-container-logo div {
+    aspect-ratio: 1;
+    width: 100%;
+
+    display: grid;
+    place-items: center;
+    place-content: center;
+
+    font-size: calc(var(--width) * .2);
+    line-height: .8em;
+
+    background-color: white;
+}
+
+div:hover {
+    rotate: 360deg;
+}
+
+#svg-container-logo div:nth-of-type(1) {
+    animation: fadeIn .5s 3s backwards;
+}
+
+#svg-container-logo div:nth-of-type(2) {
+    animation: fadeIn .5s 3.5s backwards;
+}
+
+#svg-container-logo div:nth-of-type(3) {
+    animation: fadeIn .5s 4s backwards;
+}
+
+
+
+@keyframes sizeIncrease {
+    from {
+        scale: 0;
+        opacity: 0;
+    }
+
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
+
+@keyframes titleDown {
+    from {
+        translate: 0 60%;
+    }
+
+    to {
+        translate: 0 0%;
+    }
+}
+
+@keyframes titleUp {
+    from {
+        translate: 0 -60%;
+    }
+
+    to {
+        translate: 0 0%;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#background-fake {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(circle at center, var(--svg-color) 0%, oklch(0% 0 0) 50%);
+    z-index: -1;
+    opacity: 0;
+    animation: fadeIn 1s 5s ease-in-out forwards;
+}
+
+#background-fake-2 {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: -2;
+    background-color: black;
+}
+
+@keyframes ChangeColor {
+    to {
+        fill: var(--svg-color);
+        filter: drop-shadow(0 0 20px var(--svg-color));
+        /* fill: white; */
+
+    }
+}
