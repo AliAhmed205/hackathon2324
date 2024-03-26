@@ -14,9 +14,15 @@ function createSymbolElement(symbol) {
 // make a function that will be called when the lever is clicked, add a class to the button and remove it when the animation is done
 // add a class to the button when the animation is done
 const lever = document.getElementById('lever');
+const wheelItems = document.querySelectorAll('ul[data-title="preserve-3D"] li');
+
+// console.log(wheelItems);
 
 lever.addEventListener('click', () => {
     lever.classList.add('spinning');
+    wheelItems.forEach(item => {
+        item.style.animation = 'ani-preserve-3D 10s calc(10s/-10*var(--i)) infinite linear';
+    })
     setTimeout(() => {
         lever.classList.remove('spinning');
     }, 800);
@@ -26,7 +32,6 @@ lever.addEventListener('click', () => {
 
 let spun = false;
 function spin() {
-
     if (spun) {
         reset();
     }
@@ -36,11 +41,11 @@ function spin() {
     slots.forEach((slot, index) => {
         const symbols = slot.querySelector('.symbols');
         const symbolHeight = symbols.querySelector('.symbol')?.clientHeight;
-        const symbolCount = symbols.childElementCount;
+        const symbolCount = symbols.childElementCount; // Adjust for the extra symbol
 
-        // symbols.innerHTML = '';
+        symbols.innerHTML = '';
 
-        // symbols.appendChild(createSymbolElement('❓'));
+        symbols.appendChild(createSymbolElement('❓'));
 
         for (let i = 0; i < 3; i++) {
             slotSymbols[index].forEach(symbol => {
@@ -49,19 +54,25 @@ function spin() {
         }
 
         const totalDistance = symbolCount * symbolHeight;
-        const randomOffset = -Math.floor(Math.random() * symbolCount) * symbolHeight;
+        const randomOffset = -Math.floor(Math.random() * (symbolCount + 1)) * symbolHeight + symbolHeight; // Add one symbol's height
         symbols.style.top = `${randomOffset}px`;
 
         symbols.addEventListener('transitionend', () => {
             completedSlots++;
             if (completedSlots === slots.length) {
                 logDisplayedSymbols();
+
+                wheelItems.forEach(item => {
+                    item.style.animation = 'none';
+                })
+
             }
         }, { once: true });
     });
 
     spun = true;
 }
+
 
 function reset() {
     const slots = document.querySelectorAll('.slot');

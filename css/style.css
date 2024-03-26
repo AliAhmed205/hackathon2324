@@ -112,6 +112,75 @@ button {
     }
 }
 
+.rotated{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    margin: 0 auto;
+}
+
+ul {
+  margin:0; 
+  padding:0;
+  list-style:none;
+  
+  position:relative;
+  width: calc(100% / 3);
+  aspect-ratio:2;
+  
+  display:grid;
+  place-items:center;
+  
+/*   background:#fff9; */
+}
+
+li {
+  height:70%;
+  aspect-ratio:2;
+  
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  
+  background-image:linear-gradient(in oklch, deeppink, dodgerblue);
+  border-radius:5%;
+}
+
+li:nth-of-type(1) { --i:1; }
+li:nth-of-type(2) { --i:2; }
+li:nth-of-type(3) { --i:3; }
+li:nth-of-type(4) { --i:4; }
+li:nth-of-type(5) { --i:5; }
+li:nth-of-type(6) { --i:6; }
+li:nth-of-type(7) { --i:7; }
+li:nth-of-type(8) { --i:8; }
+li:nth-of-type(9) { --i:9; }
+li:nth-of-type(10) { --i:10; }
+
+
+/******************************/
+/* [data-title="preserve-3D"] */
+/******************************/
+
+ul[data-title="preserve-3D"] {
+  perspective:2000px; 
+  /* 2. preserve-3D */
+  transform-style:preserve-3d;
+}
+
+ul[data-title="preserve-3D"] li {
+  grid-area:1/1;
+  /* 1. start animation */
+  /* animation:ani-preserve-3D 10s calc(10s/-10*var(--i)) infinite linear; */
+}
+
+
+@keyframes ani-preserve-3D {
+  0%{ transform:rotateX(0turn) translatez(min(50vw, 15em)); }
+  100%{ transform:rotateX(1turn) translatez(min(50vw, 15em)); }
+}
+
 
 
 
