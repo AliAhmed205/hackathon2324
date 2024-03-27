@@ -148,6 +148,7 @@ const spinSlot = (elementId, index) => {
     }, 1)
 }
 
+
 // FUNCTION TO DISPLAY THE CORRECT SPEAKERS
 const displaySpeakers = (data) => {
     const speakersContainer     = document.getElementById('speakers-container')
@@ -189,6 +190,7 @@ const displaySpeakers = (data) => {
 
             const speakerTitle       = document.createElement('h3')
             speakerTitle.textContent = speaker.talk.title
+            speakerTitle.style.color = "white"
 
             const speakerDesc       = document.createElement('p')
             speakerDesc.textContent = speaker.talk.description
