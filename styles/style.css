@@ -34,6 +34,10 @@ body main {
     flex-direction: column;
     align-items: center;
     height: 100%;
+
+    > section:nth-of-type(2) {
+        width: 100%;
+    }
 }
 
 #svg-container-logo {
@@ -254,10 +258,12 @@ button {
                 }
             }
 
-            /* & div:nth-of-type(2) { */
-            /* background-color: rgb(70, 237, 70); */
-            /* width: 24vw; */
-            /* } */
+             & div:nth-of-type(2) p {
+                 overflow: hidden;
+                 display: -webkit-box;
+                 -webkit-box-orient: vertical;
+                 -webkit-line-clamp: 5;
+             }
 
             & div:last-of-type {
 
