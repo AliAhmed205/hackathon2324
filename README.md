@@ -50,3 +50,11 @@
 
 <img width="400" src="https://github.com/AliAhmed205/hackathon2324/assets/118130116/7ce1b21c-de34-4485-bd96-7fafc1e53e07">
 
+## Kevin's prototype 
+
+
+https://github.com/AliAhmed205/hackathon2324/assets/118130116/40f62938-c401-4f05-8a66-6c7e1122c004
+
+
+
+
