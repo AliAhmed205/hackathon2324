@@ -27,9 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const availableCountries = [...new Set(speakersForYear.map(speaker => speaker.country))]
 
         const randomCountry             = getRandomItem(availableCountries)
-        const speakersForYearAndCountry = speakersForYear.filter(speaker => speaker.country === randomCountry)
 
-        displaySpeakers(speakersForYearAndCountry)
+        const randomSpeaker = getRandomItem(speakersForYear.filter(speaker => speaker.country === randomCountry))
+        displaySpeakers([randomSpeaker])
+
+        // const speakersForYearAndCountry = speakersForYear.filter(speaker => speaker.country === randomCountry)
+
+        // displaySpeakers(speakersForYearAndCountry)
 
     })
 
