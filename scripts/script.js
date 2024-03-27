@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let yearColors = {}
 
     const svgAnimation = document.querySelectorAll('svg path');
-    const svgPathAnim = document.querySelectorAll('svg path.new-color');
+    // const svgPathAnim = document.querySelectorAll('svg path.new-color');
 
     // Fetch data from the JSON link
     fetch('https://cssday.nl/data/speakers.json')
@@ -21,7 +21,13 @@ document.addEventListener('DOMContentLoaded', function () {
         return array[Math.floor(Math.random() * array.length)]
     }
 
+
+
     document.getElementById('lever').addEventListener('click', () => {
+
+        // make this remove displaySpeakers(speakersForYearAndCountry) 
+        // when the lever is clicked again
+        document.getElementById('speakers-container').innerHTML = '';
 
         svgAnimation.forEach(path => {
             path.classList.remove("new-color");
@@ -32,21 +38,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Adding a slight delay to ensure the class removal is processed before re-adding it.
         setTimeout(() => {
-            // Update the color property with the new color.
             document.documentElement.style.setProperty('--svg-color', yearColors[randomYear]);
 
             svgAnimation.forEach(path => {
-                // Force a reflow to ensure the animation restarts.
-
-                // Re-add the "new-color" class to trigger the animation.
                 path.classList.add("new-color");
+
             });
         }, 100);
 
         document.documentElement.style.setProperty('--svg-color', yearColors[randomYear])
-
-
-
         document.body.setAttribute("style", "height: 100%; margin-top: 5rem; margin-bottom: 10rem;");
 
         // change color
@@ -57,7 +57,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const randomCountry = getRandomItem(availableCountries)
         const speakersForYearAndCountry = speakersForYear.filter(speaker => speaker.country === randomCountry)
 
-        displaySpeakers(speakersForYearAndCountry)
+        setTimeout(() => {
+            displaySpeakers(speakersForYearAndCountry)
+        }, 5000)
 
     })
 
@@ -72,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
             speakersContainer.textContent = 'No speakers found for the selected year.'
             return
         }
+
 
         // Create a list to display speakers
         const speakersList = document.createElement('ul')
@@ -110,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // speakerItem.appendChild(speakerDescription)
             }
         })
+
         speakersContainer.appendChild(speakersList)
     }
 
