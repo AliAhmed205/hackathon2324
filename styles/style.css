@@ -90,6 +90,8 @@ svg path {
     position:relative;
     height:var(--maat);
     overflow:hidden;
+    border: 2px solid white;
+    border-radius: 10px;
 }
 
 #wheel ul {
@@ -105,13 +107,17 @@ svg path {
 #wheel ul li {
     width: var(--maat);
     aspect-ratio:1;
-    background: white;
 
     display:grid;
     place-items:center;
 
     font-size:calc(var(--maat) * .3);
     line-height:1em;
+}
+
+#wheel section ul li img {
+    width: var(--maat);
+    aspect-ratio: 1;
 }
 
 

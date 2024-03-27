@@ -19,6 +19,32 @@ fetch('https://cssday.nl/data/speakers.json')
         console.error('Error fetching data:', error)
     })
 
+const countryImageArray = [
+    './assets/images/yearbadges/2013.svg',
+    './assets/images/yearbadges/2014.svg',
+    './assets/images/yearbadges/2015.svg',
+    './assets/images/yearbadges/2016.svg',
+    './assets/images/yearbadges/2017.svg',
+    './assets/images/yearbadges/2018.svg',
+    './assets/images/yearbadges/2019.svg',
+    './assets/images/yearbadges/2022.svg',
+    './assets/images/yearbadges/2023.svg',
+    './assets/images/yearbadges/2024.svg'
+]
+
+const yearImageArray = [
+    './assets/images/yearbadges/2024.svg',
+    './assets/images/yearbadges/2023.svg',
+    './assets/images/yearbadges/2022.svg',
+    './assets/images/yearbadges/2019.svg',
+    './assets/images/yearbadges/2018.svg',
+    './assets/images/yearbadges/2017.svg',
+    './assets/images/yearbadges/2016.svg',
+    './assets/images/yearbadges/2015.svg',
+    './assets/images/yearbadges/2014.svg',
+    './assets/images/yearbadges/2013.svg',
+]
+
 // MAKE ARRAYS FROM THE FETCHED DATA
 const getCountriesAndYears = (data) => {
     countries = [...new Set(data.filter(item => item).map(item => item.country))]
@@ -33,17 +59,24 @@ const getColours = (data) => {
 
 // FILL THE SLOTS WITH THE DATA
 const fillSlots = (countries, years) => {
-    createList(countries, countrySlot)
-    createList(years, yearSlot)
+    createList(countries, countrySlot, countryImageArray)
+    createList(years, yearSlot, yearImageArray)
 }
 
 // CREATE LISTS FROM ARRAYS
-const createList = (array, container) => {
+const createList = (array, container, imageArray) => {
     let list = document.createElement('ul')
 
-    array.forEach((item) => {
+    array.forEach((item, index) => {
         let li         = document.createElement('li')
-        li.textContent = item
+
+        let img = document.createElement('img')
+
+        img.src = imageArray[index]
+        img.alt = item
+
+        li.appendChild(img)
+
         list.appendChild(li)
     })
 
@@ -239,11 +272,3 @@ const displaySpeakers = (data) => {
     })
     speakersContainer.appendChild(speakersList)
 }
-
-// const yearImageArray = ['2013.svg', '2014.svg', '2015.svg', '2016.svg', '2017.svg', '2018.svg', '2019.svg', '2022.svg', '2023.svg', '2024.svg' ]
-//
-// yearImageArray.forEach((image) => {
-//     let img = document.createElement('img')
-//     img.src = image;
-//     document.body.appendChild(img)
-// })
