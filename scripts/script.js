@@ -23,16 +23,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('lever').addEventListener('click', () => {
 
-        svgAnimation.classList.remove("new-color");
-
-        const randomYear = getRandomItem(Object.keys(yearColors))
-        console.log(randomYear)
-
         svgAnimation.forEach(path => {
-
-            // Add the class back to re-trigger the animation.
-            path.classList.add("new-color");
+            path.classList.remove("new-color");
         });
+
+        const randomYear = getRandomItem(Object.keys(yearColors));
+        console.log(randomYear);
+
+        // Adding a slight delay to ensure the class removal is processed before re-adding it.
+        setTimeout(() => {
+
+
+            // Update the color property with the new color.
+            document.documentElement.style.setProperty('--svg-color', yearColors[randomYear]);
+
+            svgAnimation.forEach(path => {
+                // Force a reflow to ensure the animation restarts.
+                // void path.offsetWidth;
+
+                // Re-add the "new-color" class to trigger the animation.
+                path.classList.add("new-color");
+            });
+        }, 10);
 
         document.documentElement.style.setProperty('--svg-color', yearColors[randomYear])
 
