@@ -1,7 +1,7 @@
 const countrySlot  = document.getElementById('countrySlot')
 const yearSlot     = document.getElementById('yearSlot')
 const svgAnimation = document.querySelectorAll('svg path')
-let allData = []
+let allData
 let countries
 let years
 let colours
@@ -29,7 +29,6 @@ const getCountriesAndYears = (data) => {
 
 const getColours = (data) => {
     colours = [...new Set(data.filter(item => item.name).map(item => item.edition.color.hex))]
-    // console.log(colours)
 }
 
 // FILL THE SLOTS WITH THE DATA
@@ -51,6 +50,7 @@ const createList = (array, container) => {
     container.appendChild(list)
 }
 
+// UPDATE THE LIST ITEMS FROM FILTERED ITEMS
 const updateList = (array, container) => {
     container.innerHTML = ''
     let list            = document.createElement('ul')
@@ -193,3 +193,11 @@ const displaySpeakers = (data) => {
     })
     speakersContainer.appendChild(speakersList)
 }
+
+const yearImageArray = ['2013.svg', '2014.svg', '2015.svg', '2016.svg', '2017.svg', '2018.svg', '2019.svg', '2022.svg', '2023.svg', '2024.svg' ]
+
+yearImageArray.forEach((image) => {
+    let img = document.createElement('img')
+    img.src = image;
+    document.body.appendChild(img)
+})
