@@ -19,19 +19,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     document.getElementById('lever').addEventListener('click', () => {
-
-        const randomYear = getRandomItem(Object.keys(yearColors))
-        console.log(randomYear)
-
-        const speakersForYear    = allData.filter(speaker => speaker.edition && speaker.edition.year === parseInt(randomYear))
-        const availableCountries = [...new Set(speakersForYear.map(speaker => speaker.country))]
-
-        const randomCountry             = getRandomItem(availableCountries)
-        const speakersForYearAndCountry = speakersForYear.filter(speaker => speaker.country === randomCountry)
-
-        displaySpeakers(speakersForYearAndCountry)
-
-    })
+        const randomYear = getRandomItem(Object.keys(yearColors));
+        console.log(randomYear);
+    
+        const yearContainer = document.getElementById('titleYear');
+    
+        // Remove any existing <h1> elements from the yearContainer
+        yearContainer.innerHTML = '';
+    
+        const speakerYear = document.createElement("h1");
+        speakerYear.textContent = randomYear;
+        yearContainer.appendChild(speakerYear);
+    
+        const speakersForYear = allData.filter(speaker => speaker.edition && speaker.edition.year === parseInt(randomYear));
+        const availableCountries = [...new Set(speakersForYear.map(speaker => speaker.country))];
+    
+        const randomCountry = getRandomItem(availableCountries);
+        const speakersForYearAndCountry = speakersForYear.filter(speaker => speaker.country === randomCountry);
+    
+        displaySpeakers(speakersForYearAndCountry);
+    });
+    
 
     // !TODO EXCLUDE 2024 SPEAKERS
 
@@ -50,20 +58,59 @@ document.addEventListener('DOMContentLoaded', function() {
         data.forEach(speaker => {
 
             if (speaker.avatar) {
+
+
                 const speakerItem = document.createElement('li')
 
-                let speakerName         = document.createElement('h2')
+
+                const speakerInfo = document.createElement('div')
+                const speakerSubject = document.createElement('div')
+                const speakerStats = document.createElement('div')
+
+                const speakerStatsList = document.createElement('ul')
+                const speakerStatsListItem1 = document.createElement('li')
+                const speakerStatsListItem2 = document.createElement('li')
+                const speakerStatsListItem3 = document.createElement('li')
+                const speakerStatsListItem4 = document.createElement('li')
+
+                const speakerYear = document.createElement('h1')
+                speakerYear.textContent = speaker.edition.year
+
+                const speakerName = document.createElement('h2')
                 speakerName.textContent = speaker.name
 
-                // Create an avatar image
                 const avatarImage = document.createElement('img')
-                // image of the speaker
-                avatarImage.src   = speaker.avatar
-                // alt text
-                avatarImage.alt   = speaker.name
+                avatarImage.src   = speaker.avatar // image of speaker
+                avatarImage.alt   = speaker.name // alt text
 
                 const speakerTitle       = document.createElement('h3')
                 speakerTitle.textContent = speaker.talk.title
+
+                const speakerDesc       = document.createElement('p')
+                speakerDesc.textContent = speaker.talk.description
+
+                const speakerDayTitle = document.createElement('h2')
+                speakerDayTitle.innerHTML = "Day"
+                const speakerDayNum = document.createElement('p')
+                speakerDayNum.textContent = speaker.day
+
+                const speakerViewsTitle = document.createElement('h2')
+                speakerViewsTitle.innerHTML = "Views"
+                const speakerViewsNum = document.createElement('p')
+                speakerViewsNum.textContent = speaker.talk.video.views
+
+                const speakerLikesTitle = document.createElement('h2')
+                speakerLikesTitle.innerHTML = "Likes"
+                const speakerLikesNum = document.createElement('p')
+                speakerLikesNum.textContent = speaker.talk.video.likes
+
+                const speakerWatchTitle = document.createElement('h2');
+                speakerWatchTitle.innerHTML = "Watch";
+                const speakerWatchNum = document.createElement('a');
+                speakerWatchNum.setAttribute('href', speaker.talk.video['youtube-link']);
+                speakerWatchNum.textContent = 'Video';
+                
+
 
                 // create description
                 // const speakerDescription = document.createElement('p')
@@ -76,9 +123,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 //     speakerDescription.textContent = speaker.talk.description
                 // }
                 speakersList.appendChild(speakerItem)
-                speakerItem.appendChild(speakerName)
-                speakerItem.appendChild(avatarImage)
-                speakerItem.appendChild(speakerTitle)
+                speakerItem.appendChild(speakerInfo)
+                speakerItem.appendChild(speakerSubject)
+                speakerItem.appendChild(speakerStats)
+                speakerInfo.appendChild(speakerName)
+                speakerInfo.appendChild(avatarImage)
+                speakerSubject.appendChild(speakerTitle)
+                speakerSubject.appendChild(speakerDesc)
+                speakerStats.appendChild(speakerStatsList)
+                speakerStatsList.appendChild(speakerStatsListItem1)
+                speakerStatsList.appendChild(speakerStatsListItem2)
+                speakerStatsList.appendChild(speakerStatsListItem3)
+                speakerStatsList.appendChild(speakerStatsListItem4)
+                speakerStatsListItem1.appendChild(speakerDayTitle)
+                speakerStatsListItem1.appendChild(speakerDayNum)
+                speakerStatsListItem2.appendChild(speakerViewsTitle)
+                speakerStatsListItem2.appendChild(speakerViewsNum)
+                speakerStatsListItem3.appendChild(speakerLikesTitle)
+                speakerStatsListItem3.appendChild(speakerLikesNum)
+                speakerStatsListItem4.appendChild(speakerWatchTitle)
+                speakerStatsListItem4.appendChild(speakerWatchNum)
                 // speakerItem.appendChild(speakerDescription)
             }
         })

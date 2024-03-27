@@ -10,6 +10,8 @@ lever.addEventListener('click', () => {
     setTimeout(() => {
         lever.classList.remove('spinning');
     }, 800);
+
+	document.body.setAttribute("style", "height: 100%; margin-top: 5rem; margin-bottom: 10rem;");
 })
 
 function spin() {
