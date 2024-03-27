@@ -13,11 +13,12 @@ html {
 
 :root {
     --svg-color: lightskyblue;
+    --transition-duration: 1s;
+    --filter: drop-shadow(0 0 20px var(--svg-color));
 }
 
 body {
     background-color: hsla(0, 0%, 0%, 1);
-    /* width: 100%; */
     height: 100dvh;
     background-image:
             radial-gradient(at 51% 51%, hsla(266, 54%, 13%, 1) 0px, transparent 50%),
@@ -33,15 +34,6 @@ body main {
     flex-direction: column;
     align-items: center;
     height: 100%;
-    overflow: scroll;
-
-    /* background-color: hsla(0, 0%, 0%, 1);
-    background-image:
-        radial-gradient(at 51% 51%, hsla(266, 54%, 13%, 1) 0px, transparent 50%),
-        radial-gradient(at 94% 87%, hsla(265, 77%, 16%, 1) 0px, transparent 50%),
-        radial-gradient(at 0% 0%, hsla(254, 100%, 18%, 1) 0px, transparent 50%);
-    background-repeat: no-repeat;
-    background-size: cover; */
 }
 
 #svg-container-logo {
@@ -82,12 +74,12 @@ body main {
 svg path {
     fill: white;
     transition: fill 1s;
-}
+    animation: ChangeColor 2s 5s ease-out forwards;
 
-svg path {
-    animation: ChangeColor 3s 5s linear(0 0%, 0.22 2.1%, 0.86 6.5%, 1.11 8.6%, 1.3 10.7%, 1.35 11.8%, 1.37 12.9%, 1.37 13.7%, 1.36 14.5%, 1.32 16.2%, 1.03 21.8%, 0.94 24%, 0.89 25.9%, 0.88 26.85%, 0.87 27.8%, 0.87 29.25%, 0.88 30.7%, 0.91 32.4%, 0.98 36.4%, 1.01 38.3%, 1.04 40.5%, 1.05 42.7%, 1.05 44.1%, 1.04 45.7%, 1 53.3%, 0.99 55.4%, 0.98 57.5%, 0.99 60.7%, 1 68.1%, 1.01 72.2%, 1 86.7%, 1 100%) forwards;
+    &.new-color {
+        animation: ChangeNewColor 2s ease-out forwards;
+    }
 }
-
 #wheel {
     display:flex;
     justify-content: space-between;
@@ -107,7 +99,7 @@ svg path {
     list-style:none;
 
     translate:0 calc( var(--maat) * -1 * var(--aantal, 0));
-    transition: calc(var(--dur) * 1s);
+    transition: calc(var(--duur) * 1s);
 }
 
 #wheel ul li {
@@ -120,7 +112,6 @@ svg path {
 
     font-size:calc(var(--maat) * .3);
     line-height:1em;
-    user-select: none;
 }
 
 
@@ -243,39 +234,79 @@ button {
 }
 
 @keyframes ChangeColor {
+    from {
+        filter: drop-shadow(none);
+    }
+
     to {
         fill: var(--svg-color);
-        filter: drop-shadow(0 0 20px var(--svg-color));
-        /* fill: white; */
-
+        filter: var(--filter);
     }
+}
+
+@keyframes ChangeNewColor {
+    from {
+        filter: drop-shadow(none);
+    }
+
+    to {
+        fill: var(--svg-color);
+        filter: var(--filter);
+    }
+}
+
+#speakers-container {
+    width: 100%;
 }
 
 #speakers-container ul {
     display: flex;
+    justify-content: center;
     overflow: scroll;
     margin-top: 5em;
 
-    li {
-        list-style-type: none;
-        margin-right: 1em;
-        padding: 2rem;
-        text-align: center;
-        font-size: 1.5rem;
-        width: 25rem;
-        transition: 0.5s;
-        /* From https://css.glass */
-        background: rgba(255, 255, 255, 0.14);
-        border-radius: 16px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(9.2px);
-        -webkit-backdrop-filter: blur(9.2px);
-        border: 1px solid rgba(255, 255, 255, 0.39);
-        color: white;
+     li {
+         list-style-type: none;
+         margin-right: 1em;
+         padding: 2rem;
+         text-align: center;
+         font-size: 1.5rem;
+         width: 25rem;
+         transition: 0.5s;
+         /* From https://css.glass */
+         background: rgba(255, 255, 255, 0.14);
+         border-radius: 16px;
+         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+         backdrop-filter: blur(9.2px);
+         -webkit-backdrop-filter: blur(9.2px);
+         border: 1px solid rgba(255, 255, 255, 0.39);
+         color: white;
+     }
+}
+
+#speakers-container img {
+    padding: 1rem;
+    width: 20rem;
+}
+
+@keyframes ChangeColor {
+    from {
+        filter: drop-shadow(none);
     }
 
-    img {
-        padding: 1rem;
-        width: 20rem;
+    to {
+        fill: var(--svg-color);
+        filter: var(--filter);
+    }
+}
+
+@keyframes ChangeNewColor {
+    from {
+        filter: drop-shadow(none);
+    }
+
+    to {
+        fill: var(--svg-color);
+        filter: var(--filter);
     }
 }

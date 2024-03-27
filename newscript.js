@@ -1,14 +1,18 @@
-const countrySlot = document.getElementById('countrySlot')
-const yearSlot    = document.getElementById('yearSlot')
-let allData
+const countrySlot  = document.getElementById('countrySlot')
+const yearSlot     = document.getElementById('yearSlot')
+const svgAnimation = document.querySelectorAll('svg path')
+let allData = []
 let countries
 let years
+let colours
 
 // FETCH DATA
 fetch('https://cssday.nl/data/speakers.json')
     .then(response => response.json())
     .then(data => {
         allData = data
+        // console.log(allData)
+        getColours(data)
         getCountriesAndYears(data)
     })
     .catch(error => {
@@ -21,6 +25,11 @@ const getCountriesAndYears = (data) => {
     years     = [...new Set(data.filter(item => item).map(item => item.edition.year))]
 
     fillSlots(countries, years)
+}
+
+const getColours = (data) => {
+    colours = [...new Set(data.filter(item => item.name).map(item => item.edition.color.hex))]
+    // console.log(colours)
 }
 
 // FILL THE SLOTS WITH THE DATA
@@ -70,6 +79,12 @@ const lever = document.getElementById('lever')
 
 lever.addEventListener('click', () => {
 
+    document.getElementById('speakers-container').innerHTML = ''
+
+    svgAnimation.forEach(path => {
+        path.classList.remove('new-color')
+    })
+
     lever.classList.add('spinning')
     setTimeout(() => {
         lever.classList.remove('spinning')
@@ -86,29 +101,43 @@ lever.addEventListener('click', () => {
     const randomCountry             = getRandomItem(availableCountries)
     const speakersForYearAndCountry = speakersForYear.filter(speaker => speaker.country === randomCountry.value)
 
+    // Adding a slight delay to ensure the class removal is processed before re-adding it.
+    setTimeout(() => {
+        document.documentElement.style.setProperty('--svg-color', colours[randomYear.index])
+
+        svgAnimation.forEach(path => {
+            path.classList.add('new-color')
+
+        })
+    }, 1000)
+
     spinSlot(yearSlot, randomYear.index)
     spinSlot(countrySlot, randomCountry.index)
-    displaySpeakers(speakersForYearAndCountry)
 
     document.body.setAttribute('style', 'height: 100%; margin-top: 5rem; margin-bottom: 10rem;')
-    // document.documentElement.style.setProperty('--svg-color', yearColors[randomYear])
+    document.documentElement.style.setProperty('--svg-color', colours[randomYear.index])
+
+    setTimeout(() => {
+        displaySpeakers(speakersForYearAndCountry)
+    }, 2000)
+
 })
 
 // FUNCTION TO SPIN THE SLOTS IN THE WHEEL
 const spinSlot = (elementId, index) => {
     const ul = elementId
 
-    ul.style.setProperty('--aantal', 0);
+    ul.style.setProperty('--aantal', 0)
 
     setTimeout(() => {
-        ul.style.setProperty('--dur', 1);
-        ul.style.setProperty('--aantal', index);
+        ul.style.setProperty('--duur', 2)
+        ul.style.setProperty('--aantal', index)
 
         ul.addEventListener('transitionend', () => {
-            ul.style.setProperty('--dur', 0);
-        });
+            ul.style.setProperty('--duur', 0)
+        })
 
-    }, 1);
+    }, 1)
 }
 
 // FUNCTION TO DISPLAY THE CORRECT SPEAKERS
