@@ -191,6 +191,131 @@ button {
     }
 }
 
+#titleYear {
+    margin-top: 10em;
+    margin-bottom: 5em;
+
+    & h1 {
+        font-size: 4rem;
+        background-color: var(--svg-color);
+        width: fit-content;
+        padding-right: 6rem;
+        padding-left: 3rem;
+        animation: slideIn 1s 1s forwards ease-out;
+        translate: -10em 0;
+    }
+}
+
+#speakers-container {
+    width: 100%;
+    position: relative;
+    margin-top: 3em;
+    color: #fff;
+
+    & ul {
+        width: 80%;
+        margin: auto;
+        display: block;
+
+        & li {
+            width: 100%;
+            /* background: white; */
+            margin-bottom: 5em;
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+
+            & div {
+                width: calc(100% / 3 - 2em);
+
+                & h2,
+                & h3 {
+                    font-size: 1.31rem;
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    margin-bottom: 2rem;
+                }
+
+                & h3 {
+                    color: var(--svg-color);
+                    font-weight: 900;
+                }
+            }
+
+            & div:first-of-type {
+                display: flex;
+                flex-direction: column;
+
+                & img {
+                    width: 80%;
+                    border: solid .5em var(--svg-color);
+                }
+            }
+
+            /* & div:nth-of-type(2) { */
+            /* background-color: rgb(70, 237, 70); */
+            /* width: 24vw; */
+            /* } */
+
+            & div:last-of-type {
+
+                & ul {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    grid-template-rows: repeat(2, 1fr);
+                    grid-column-gap: 1em;
+                    grid-row-gap: 1em;
+
+                    & li {
+                        margin: 0;
+                        width: 100%;
+                        aspect-ratio: 1;
+                        background-color: var(--svg-color);
+                        align-items: center;
+                        justify-content: center;
+                        align-content: center;
+                        border-radius: 10px;
+                        transition: .5s;
+
+
+                        & h2,
+                        & p,
+                        & a {
+                            width: 100%;
+                            text-align: center;
+                            font-weight: 900;
+                            text-decoration: none;
+                            color: white;
+                        }
+
+
+                        & h2 {
+                            margin: 0;
+                            font-size: 1rem;
+                            text-transform: uppercase;
+                            font-weight: 300;
+                        }
+
+                        & p,
+                        & a {
+                            margin: 0;
+                            font-size: 2rem;
+                        }
+                    }
+
+                    & li:hover {
+                        filter: brightness(1.2);
+                    }
+
+                }
+            }
+        }
+    }
+
+}
+
 @keyframes sizeIncrease {
     from {
         scale: 0;
@@ -255,40 +380,6 @@ button {
     }
 }
 
-#speakers-container {
-    width: 100%;
-}
-
-#speakers-container ul {
-    display: flex;
-    justify-content: center;
-    overflow: scroll;
-    margin-top: 5em;
-
-     li {
-         list-style-type: none;
-         margin-right: 1em;
-         padding: 2rem;
-         text-align: center;
-         font-size: 1.5rem;
-         width: 25rem;
-         transition: 0.5s;
-         /* From https://css.glass */
-         background: rgba(255, 255, 255, 0.14);
-         border-radius: 16px;
-         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-         backdrop-filter: blur(9.2px);
-         -webkit-backdrop-filter: blur(9.2px);
-         border: 1px solid rgba(255, 255, 255, 0.39);
-         color: white;
-     }
-}
-
-#speakers-container img {
-    padding: 1rem;
-    width: 20rem;
-}
-
 @keyframes ChangeColor {
     from {
         filter: drop-shadow(none);
@@ -308,5 +399,11 @@ button {
     to {
         fill: var(--svg-color);
         filter: var(--filter);
+    }
+}
+
+@keyframes slideIn {
+    to {
+        translate: 0 0;
     }
 }

@@ -81,6 +81,7 @@ lever.addEventListener('click', () => {
 
     document.getElementById('speakers-container').innerHTML = ''
 
+
     svgAnimation.forEach(path => {
         path.classList.remove('new-color')
     })
@@ -91,6 +92,13 @@ lever.addEventListener('click', () => {
     }, 800)
 
     const randomYear = getRandomItem(years)
+
+    const yearContainer = document.getElementById('titleYear')
+    yearContainer.innerHTML = ''
+    const speakerYear = document.createElement("h1");
+    speakerYear.textContent = randomYear.value;
+
+    yearContainer.appendChild(speakerYear);
 
     const speakersForYear = allData.filter(speaker => speaker.edition && speaker.edition.year === parseInt(randomYear.value))
 
@@ -143,61 +151,99 @@ const spinSlot = (elementId, index) => {
 // FUNCTION TO DISPLAY THE CORRECT SPEAKERS
 const displaySpeakers = (data) => {
     const speakersContainer     = document.getElementById('speakers-container')
-    speakersContainer.innerHTML = ''
+    speakersContainer.innerHTML = '' // Clear previous data
 
+    // Check if there are speakers to display
     if (data.length === 0) {
         speakersContainer.textContent = 'No speakers found for the selected year.'
         return
     }
 
+    // Create a list to display speakers
     const speakersList = document.createElement('ul')
     data.forEach(speaker => {
 
         if (speaker.avatar) {
+
             const speakerItem = document.createElement('li')
 
-            let speakerYear         = document.createElement('p')
-            speakerYear.textContent = speaker.edition.date
+            const speakerInfo = document.createElement('div')
+            const speakerSubject = document.createElement('div')
+            const speakerStats = document.createElement('div')
 
-            let speakerCountry         = document.createElement('p')
-            speakerCountry.textContent = speaker.country
+            const speakerStatsList = document.createElement('ul')
+            const speakerStatsListItem1 = document.createElement('li')
+            const speakerStatsListItem2 = document.createElement('li')
+            const speakerStatsListItem3 = document.createElement('li')
+            const speakerStatsListItem4 = document.createElement('li')
 
-            let speakerName         = document.createElement('h2')
+            const speakerYear = document.createElement('h1')
+            speakerYear.textContent = speaker.edition.year
+
+            const speakerName = document.createElement('h2')
             speakerName.textContent = speaker.name
 
             const avatarImage = document.createElement('img')
-            avatarImage.src   = speaker.avatar
-            avatarImage.alt   = speaker.name
+            avatarImage.src   = speaker.avatar // image of speaker
+            avatarImage.alt   = speaker.name // alt text
 
             const speakerTitle       = document.createElement('h3')
             speakerTitle.textContent = speaker.talk.title
 
-            const speakerDescription = document.createElement('p')
+            const speakerDesc       = document.createElement('p')
+            speakerDesc.textContent = speaker.talk.description
 
-            if (speaker.day === false) {
-                speakerDescription.textContent = 'Upcoming'
-            } else if (speaker.talk.description === false) {
-                speakerDescription.textContent = ''
-            } else {
-                speakerDescription.textContent = speaker.talk.description
-            }
+            const speakerDayTitle = document.createElement('h2')
+            speakerDayTitle.innerHTML = "Day"
+            const speakerDayNum = document.createElement('p')
+            speakerDayNum.textContent = speaker.day
+
+            const speakerViewsTitle = document.createElement('h2')
+            speakerViewsTitle.innerHTML = "Views"
+            const speakerViewsNum = document.createElement('p')
+            speakerViewsNum.textContent = speaker.talk.video.views
+
+            const speakerLikesTitle = document.createElement('h2')
+            speakerLikesTitle.innerHTML = "Likes"
+            const speakerLikesNum = document.createElement('p')
+            speakerLikesNum.textContent = speaker.talk.video.likes
+
+            const speakerWatchTitle = document.createElement('h2');
+            speakerWatchTitle.innerHTML = "Watch";
+            const speakerWatchNum = document.createElement('a');
+            speakerWatchNum.setAttribute('href', speaker.talk.video['youtube-link']);
+            speakerWatchNum.textContent = 'Video';
 
             speakersList.appendChild(speakerItem)
-            speakerItem.appendChild(speakerCountry)
-            speakerItem.appendChild(speakerYear)
-            speakerItem.appendChild(speakerName)
-            speakerItem.appendChild(avatarImage)
-            speakerItem.appendChild(speakerTitle)
-            speakerItem.appendChild(speakerDescription)
+            speakerItem.appendChild(speakerInfo)
+            speakerItem.appendChild(speakerSubject)
+            speakerItem.appendChild(speakerStats)
+            speakerInfo.appendChild(speakerName)
+            speakerInfo.appendChild(avatarImage)
+            speakerSubject.appendChild(speakerTitle)
+            speakerSubject.appendChild(speakerDesc)
+            speakerStats.appendChild(speakerStatsList)
+            speakerStatsList.appendChild(speakerStatsListItem1)
+            speakerStatsList.appendChild(speakerStatsListItem2)
+            speakerStatsList.appendChild(speakerStatsListItem3)
+            speakerStatsList.appendChild(speakerStatsListItem4)
+            speakerStatsListItem1.appendChild(speakerDayTitle)
+            speakerStatsListItem1.appendChild(speakerDayNum)
+            speakerStatsListItem2.appendChild(speakerViewsTitle)
+            speakerStatsListItem2.appendChild(speakerViewsNum)
+            speakerStatsListItem3.appendChild(speakerLikesTitle)
+            speakerStatsListItem3.appendChild(speakerLikesNum)
+            speakerStatsListItem4.appendChild(speakerWatchTitle)
+            speakerStatsListItem4.appendChild(speakerWatchNum)
         }
     })
     speakersContainer.appendChild(speakersList)
 }
 
-const yearImageArray = ['2013.svg', '2014.svg', '2015.svg', '2016.svg', '2017.svg', '2018.svg', '2019.svg', '2022.svg', '2023.svg', '2024.svg' ]
-
-yearImageArray.forEach((image) => {
-    let img = document.createElement('img')
-    img.src = image;
-    document.body.appendChild(img)
-})
+// const yearImageArray = ['2013.svg', '2014.svg', '2015.svg', '2016.svg', '2017.svg', '2018.svg', '2019.svg', '2022.svg', '2023.svg', '2024.svg' ]
+//
+// yearImageArray.forEach((image) => {
+//     let img = document.createElement('img')
+//     img.src = image;
+//     document.body.appendChild(img)
+// })
