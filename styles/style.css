@@ -17,7 +17,6 @@ html {
 
 body {
     background-color: hsla(0, 0%, 0%, 1);
-    /* width: 100%; */
     height: 100dvh;
     background-image:
         radial-gradient(at 51% 51%, hsla(266, 54%, 13%, 1) 0px, transparent 50%),
@@ -33,15 +32,6 @@ body main {
     flex-direction: column;
     align-items: center;
     height: 100%;
-    overflow: scroll;
-
-    /* background-color: hsla(0, 0%, 0%, 1);
-    background-image:
-        radial-gradient(at 51% 51%, hsla(266, 54%, 13%, 1) 0px, transparent 50%),
-        radial-gradient(at 94% 87%, hsla(265, 77%, 16%, 1) 0px, transparent 50%),
-        radial-gradient(at 0% 0%, hsla(254, 100%, 18%, 1) 0px, transparent 50%);
-    background-repeat: no-repeat;
-    background-size: cover; */
 }
 
 #svg-container-logo {
@@ -247,6 +237,10 @@ button {
         /* fill: white; */
 
     }
+}
+
+#speakers-container {
+    width: 100%;
 }
 
 #speakers-container ul {

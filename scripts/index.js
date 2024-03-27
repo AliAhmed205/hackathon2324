@@ -7,9 +7,12 @@ const lever = document.getElementById('lever');
 
 lever.addEventListener('click', () => {
     lever.classList.add('spinning');
+
     setTimeout(() => {
         lever.classList.remove('spinning');
     }, 800);
+
+	document.body.setAttribute("style", "height: 100%; margin-top: 5rem; margin-bottom: 10rem;");
 })
 
 function spin() {

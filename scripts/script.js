@@ -28,12 +28,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const randomCountry             = getRandomItem(availableCountries)
 
-        const randomSpeaker = getRandomItem(speakersForYear.filter(speaker => speaker.country === randomCountry))
-        displaySpeakers([randomSpeaker])
+        // const randomSpeaker = getRandomItem(speakersForYear.filter(speaker => speaker.country === randomCountry))
+        // displaySpeakers([randomSpeaker])
 
-        // const speakersForYearAndCountry = speakersForYear.filter(speaker => speaker.country === randomCountry)
-
-        // displaySpeakers(speakersForYearAndCountry)
+        const speakersForYearAndCountry = speakersForYear.filter(speaker => speaker.country === randomCountry)
+        displaySpeakers(speakersForYearAndCountry)
 
     })
 
