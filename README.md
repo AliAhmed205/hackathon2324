@@ -47,3 +47,6 @@
 ## Ali 
 <p>Ali zal verantwoordelijk zijn voor het initiële stadium van de pagina. Hij zorgt ervoor dat de animatie goed getimed is en dat er ruimte is voor de functionaliteit van Kevin. Bovendien is hij verantwoordelijk voor de responsiviteit op dit gebied.</p>
 
+
+<img width="400" src="https://github.com/AliAhmed205/hackathon2324/assets/118130116/7ce1b21c-de34-4485-bd96-7fafc1e53e07">
+
