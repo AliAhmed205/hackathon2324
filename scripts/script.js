@@ -25,8 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('lever').addEventListener('click', () => {
 
-        // make this remove displaySpeakers(speakersForYearAndCountry) 
-        // when the lever is clicked again
         document.getElementById('speakers-container').innerHTML = '';
 
         svgAnimation.forEach(path => {
@@ -44,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 path.classList.add("new-color");
 
             });
-        }, 100);
+        }, 4000);
 
         document.documentElement.style.setProperty('--svg-color', yearColors[randomYear])
         document.body.setAttribute("style", "height: 100%; margin-top: 5rem; margin-bottom: 10rem;");

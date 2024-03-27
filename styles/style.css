@@ -214,6 +214,9 @@ div:not(button div):hover {
   from {
     filter: drop-shadow(none);
     /* fill: var(--svg-color); */
+    /* transition-delay: 5s; */
+    /* color: white; */
+    /* transition-delay: 3s; */
   }
 
   to {
