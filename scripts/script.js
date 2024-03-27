@@ -32,19 +32,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Adding a slight delay to ensure the class removal is processed before re-adding it.
         setTimeout(() => {
-
-
             // Update the color property with the new color.
             document.documentElement.style.setProperty('--svg-color', yearColors[randomYear]);
 
             svgAnimation.forEach(path => {
                 // Force a reflow to ensure the animation restarts.
-                // void path.offsetWidth;
 
                 // Re-add the "new-color" class to trigger the animation.
                 path.classList.add("new-color");
             });
-        }, 10);
+        }, 100);
 
         document.documentElement.style.setProperty('--svg-color', yearColors[randomYear])
 

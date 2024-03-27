@@ -213,14 +213,12 @@ div:not(button div):hover {
 @keyframes ChangeNewColor {
   from {
     filter: drop-shadow(none);
+    /* fill: var(--svg-color); */
   }
 
   to {
     fill: var(--svg-color);
     filter: var(--filter);
-    /* transition: 1s; */
-
-    /* fill: white; */
   }
 }
 
