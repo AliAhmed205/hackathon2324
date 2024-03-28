@@ -82,8 +82,10 @@ console.log(SectionSpeakers)
 
 lever.addEventListener('click', () => {
 
-    document.getElementById('speakers-container').innerHTML = ''
+    const sound = document.getElementById("mySound");
+    sound.play();
 
+    document.getElementById('speakers-container').innerHTML = ''
 
     svgAnimation.forEach(path => {
         path.classList.remove('new-color')
