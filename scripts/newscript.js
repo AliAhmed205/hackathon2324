@@ -173,6 +173,7 @@ const displaySpeakers = (data) => {
 
             const speakerItem = document.createElement('li')
             speakerItem.setAttribute('tabindex', '0')
+            speakerItem.setAttribute('aria-label', `Speaker ${speaker.name} from ${speaker.country} with the talk ${speaker.talk.title}.`)
             speakerItem.addEventListener('focus', () => {
                 speakerItem.scrollIntoView({ behavior: 'smooth', block: 'center' })
             })
