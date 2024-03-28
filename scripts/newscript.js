@@ -1,5 +1,6 @@
 const countrySlot  = document.getElementById('countrySlot')
 const yearSlot     = document.getElementById('yearSlot')
+const viewSlot = document.getElementById('viewSlot')
 const svgAnimation = document.querySelectorAll('svg path')
 let allData
 let countries
@@ -126,6 +127,7 @@ lever.addEventListener('click', () => {
 
     spinSlot(yearSlot, randomYear.index)
     spinSlot(countrySlot, randomCountry.index)
+    spinSlot(viewSlot, randomYear.index)
 
     document.body.setAttribute('style', 'height: 100%; margin-bottom: 10rem;') // 5 rem aangepast weghalen
     document.documentElement.style.setProperty('--svg-color', colours[randomYear.index])

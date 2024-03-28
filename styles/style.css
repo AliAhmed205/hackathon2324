@@ -128,6 +128,11 @@ svg path {
 
     font-size:calc(var(--maat) * .3);
     line-height:1em;
+
+    img {
+        width: var(--maat);
+        aspect-ratio: 1;
+    }
 }
 
 
