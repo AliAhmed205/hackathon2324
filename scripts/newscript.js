@@ -76,6 +76,9 @@ const getRandomItem = (array) => {
 
 // LEVER FUNCTIONALITY FOR SPINNING
 const lever = document.getElementById('lever')
+const SectionSpeakers = document.querySelector('section[data-section="speakers"]') // aangepast
+
+console.log(SectionSpeakers)
 
 lever.addEventListener('click', () => {
 
@@ -122,11 +125,14 @@ lever.addEventListener('click', () => {
     spinSlot(yearSlot, randomYear.index)
     spinSlot(countrySlot, randomCountry.index)
 
-    document.body.setAttribute('style', 'height: 100%; margin-top: 5rem; margin-bottom: 10rem;')
+    document.body.setAttribute('style', 'height: 100%; margin-bottom: 10rem;') // 5 rem aangepast weghalen
     document.documentElement.style.setProperty('--svg-color', colours[randomYear.index])
+
+
 
     setTimeout(() => {
         displaySpeakers(speakersForYearAndCountry)
+        SectionSpeakers.scrollIntoView({behavior: "smooth"}); // aangepast
     }, 2000)
 
 })
@@ -166,6 +172,10 @@ const displaySpeakers = (data) => {
         if (speaker.avatar) {
 
             const speakerItem = document.createElement('li')
+            speakerItem.setAttribute('tabindex', '0')
+            speakerItem.addEventListener('focus', () => {
+                speakerItem.scrollIntoView({ behavior: 'smooth', block: 'center' })
+            })
 
             const speakerInfo = document.createElement('div')
             const speakerSubject = document.createElement('div')
@@ -189,30 +199,56 @@ const displaySpeakers = (data) => {
 
             const speakerTitle       = document.createElement('h3')
             speakerTitle.textContent = speaker.talk.title
+            speakerTitle.style.color = 'white'
 
             const speakerDesc       = document.createElement('p')
-            speakerDesc.textContent = speaker.talk.description
+            if (speaker.talk.description && speaker.talk.description.trim() !== "") {
+                speakerDesc.textContent = speaker.talk.description;
+            } else {
+                speakerDesc.textContent = "No description yet";
+            } // aangepast
+            
 
             const speakerDayTitle = document.createElement('h2')
             speakerDayTitle.innerHTML = "Day"
             const speakerDayNum = document.createElement('p')
-            speakerDayNum.textContent = speaker.day
+            if (speaker.day && speaker.day !== '') {
+                speakerDayNum.textContent = speaker.day;
+            } else {
+                speakerDayNum.textContent = "N/A";
+            } // aangepast
 
             const speakerViewsTitle = document.createElement('h2')
             speakerViewsTitle.innerHTML = "Views"
             const speakerViewsNum = document.createElement('p')
-            speakerViewsNum.textContent = speaker.talk.video.views
+            // speakerViewsNum.textContent = speaker.talk.video.views
+            if (speaker.talk.video.views && speaker.talk.video.views !== '') {
+                speakerViewsNum.textContent = speaker.talk.video.views;
+            } else {
+                speakerViewsNum.textContent = "N/A";
+            } // aangepast
 
             const speakerLikesTitle = document.createElement('h2')
             speakerLikesTitle.innerHTML = "Likes"
             const speakerLikesNum = document.createElement('p')
-            speakerLikesNum.textContent = speaker.talk.video.likes
+            // speakerLikesNum.textContent = speaker.talk.video.likes
+            if (speaker.talk.video.likes && speaker.talk.video.likes !== '') {
+                speakerLikesNum.textContent = speaker.talk.video.likes;
+            } else {
+                speakerLikesNum.textContent = "N/A";
+            } // aangepast
 
             const speakerWatchTitle = document.createElement('h2');
             speakerWatchTitle.innerHTML = "Watch";
             const speakerWatchNum = document.createElement('a');
-            speakerWatchNum.setAttribute('href', speaker.talk.video['youtube-link']);
-            speakerWatchNum.textContent = 'Video';
+            // speakerWatchNum.setAttribute('href', speaker.talk.video['youtube-link']); uitgezet
+            speakerWatchNum.textContent = '🎥'; // aangepast
+
+            if (speaker.talk.video['youtube-link']) {
+                speakerWatchNum.setAttribute('href', speaker.talk.video['youtube-link']);
+            } else {
+                speakerWatchNum.setAttribute('disabled', true); 
+            } // aangepast
 
             speakersList.appendChild(speakerItem)
             speakerItem.appendChild(speakerInfo)

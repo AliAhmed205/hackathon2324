@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fahkwang:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Fredoka:wght@300..700&family=Noto+Emoji:wght@300..700&display=swap');
+
 @font-face {
     font-family: 'gang of three';
     src: url(../assets/fonts/go3v2.ttf) format('truetype');
@@ -33,11 +35,13 @@ body {
             radial-gradient(at 0% 0%, hsla(254, 100%, 18%, 1) 0px, transparent 50%);
     background-repeat: no-repeat;
     background-size: cover; 
+    font-family: "Fahkwang", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body main {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; // uitgezet */
+    /* margin-top: 5rem; aangepast */
     flex-direction: column;
     align-items: center;
     height: 100%;
@@ -56,6 +60,7 @@ body main {
     position: relative;
     width: var(--width);
     /* margin-top: 40vh; */
+    margin-top: 5rem;
 
     display: grid;
     grid-template-columns: repeat(3, 1fr) 0.5fr;
@@ -203,17 +208,23 @@ button {
 }
 
 #titleYear {
-    margin-top: 10em;
-    margin-bottom: 5em;
-
+    width: 100%;
+    margin: 10em 0 5em;
+    display: flex;
+    justify-content: center;
+ 
     & h1 {
-        font-size: 4rem;
+        font-size: clamp(2rem, 4vw, 3rem);
         background-color: var(--svg-color);
         width: fit-content;
-        padding-right: 6rem;
-        padding-left: 3rem;
+        padding: .3em 1em;
         animation: slideIn 1s 1s forwards ease-out;
-        translate: -10em 0;
+        color: white;
+        border-radius: 100px;
+        transform: translateX(-200%);
+        opacity: 0;
+        animation: slideIn .5s forward ease-in-out;
+        box-shadow: var(--svg-color) 0 0 20px;
     }
 }
 
@@ -222,25 +233,37 @@ button {
     position: relative;
     margin-top: 3em;
     color: #fff;
-
+ 
     & ul {
         width: 80%;
         margin: auto;
         display: block;
-
+ 
         & li {
             width: 100%;
-            /* background: white; */
             margin-bottom: 5em;
-
+ 
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-
-
+ 
+            /* ADDED ON 28/03/2024 */
+            /* Create View Timeline */
+            view-timeline-name: --speakers-container;
+            view-timeline-axis: block;
+ 
+            /* Attach animation, linked to the  View Timeline */
+            animation: linear fadeIn both;
+            animation-timeline: --speakers-container;
+ 
+            /* Tweak range when effect should run*/
+            animation-range: entry 25% cover 50%;
+ 
+ 
+ 
             & div {
                 width: calc(100% / 3 - 2em);
-
+ 
                 & h2,
                 & h3 {
                     font-size: 1.31rem;
@@ -248,39 +271,41 @@ button {
                     margin-bottom: 0;
                     margin-bottom: 2rem;
                 }
-
+ 
                 & h3 {
                     color: var(--svg-color);
                     font-weight: 900;
+                    font-size: 1.8em;
                 }
             }
-
+ 
             & div:first-of-type {
                 display: flex;
                 flex-direction: column;
-
+ 
                 & img {
                     width: 80%;
                     border: solid .5em var(--svg-color);
                 }
             }
-
-             & div:nth-of-type(2) p {
-                 overflow: hidden;
-                 display: -webkit-box;
-                 -webkit-box-orient: vertical;
-                 -webkit-line-clamp: 5;
-             }
-
+ 
+            & div:nth-of-type(2) p {
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 5;
+            }
+ 
             & div:last-of-type {
-
+ 
                 & ul {
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
                     grid-template-rows: repeat(2, 1fr);
                     grid-column-gap: 1em;
                     grid-row-gap: 1em;
-
+                    width: 100%;
+ 
                     & li {
                         margin: 0;
                         width: 100%;
@@ -291,8 +316,8 @@ button {
                         align-content: center;
                         border-radius: 10px;
                         transition: .5s;
-
-
+ 
+ 
                         & h2,
                         & p,
                         & a {
@@ -302,31 +327,115 @@ button {
                             text-decoration: none;
                             color: white;
                         }
-
-
+ 
+ 
                         & h2 {
                             margin: 0;
-                            font-size: 1rem;
+                            font-size: clamp(0.7rem, 4vw, 1rem);
                             text-transform: uppercase;
                             font-weight: 300;
                         }
-
+ 
                         & p,
                         & a {
                             margin: 0;
-                            font-size: 2rem;
+                            font-size: clamp(1rem, 4vw, 2rem);
                         }
                     }
-
+ 
                     & li:hover {
                         filter: brightness(1.2);
                     }
-
+ 
                 }
             }
         }
     }
-
+ 
+}
+ 
+@media (max-width:1000px) {
+ 
+ 
+    #speakers-container {
+        & ul {
+ 
+            & li {
+                animation-range: entry 5% cover 20%;
+ 
+                & div:first-of-type {
+                    width: 50%;
+                }
+ 
+                & div:nth-of-type(2) {
+                    width: 50%;
+                }
+ 
+                & div:last-of-type {
+                    width: 100%;
+                    margin-top: 3em;
+ 
+                    & ul {
+                        grid-template-columns: repeat(4, 1fr);
+                        grid-template-rows: 1fr;
+ 
+                        & li {
+                            aspect-ratio: 1;
+                        }
+ 
+                    }
+                }
+ 
+            }
+        }
+ 
+    }
+ 
+}
+ 
+@media (max-width: 800px) {
+    #speakers-container {
+        & ul {
+            & li {
+                & div {
+                    & h3 {
+                        font-size: 1.5em;
+                        margin-bottom: 1em;
+                    }
+                }
+            }
+        }
+    }
+}
+ 
+@media (max-width: 500px){
+    #speakers-container {
+        & ul {
+            & li {
+                & div:first-of-type {
+                    width: 100%;
+ 
+                    & img{
+                        width: 100%;
+                        margin-bottom: 2em;
+                    }
+                }
+ 
+                & div:nth-of-type(2) {
+                    width: 100%;
+                }
+ 
+                & div:last-of-type {
+                    width: 100%;
+ 
+                    & ul {
+                        grid-template-columns: repeat(2, 1fr);
+                        grid-template-rows: repeat(2, 1fr);
+                    }
+                }
+            }
+        }
+    }
 }
 
 @keyframes sizeIncrease {
@@ -393,30 +502,14 @@ button {
     }
 }
 
-@keyframes ChangeColor {
-    from {
-        filter: drop-shadow(none);
-    }
-
-    to {
-        fill: var(--svg-color);
-        filter: var(--filter);
-    }
-}
-
-@keyframes ChangeNewColor {
-    from {
-        filter: drop-shadow(none);
-    }
-
-    to {
-        fill: var(--svg-color);
-        filter: var(--filter);
-    }
-}
-
 @keyframes slideIn {
-    to {
-        translate: 0 0;
+    0% {
+        opacity: 0;
+        transform: translateX(-200%);
+    }
+ 
+    100% {
+        opacity: 1;
+        transform: translateX(0)
     }
 }
