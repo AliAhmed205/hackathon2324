@@ -45,7 +45,10 @@
 <img width="500" src="https://github.com/AliAhmed205/hackathon2324/assets/118130116/c71f69c2-ba4d-407d-8777-f40760bfbcce">
 
 ## Ali 
-<p>Ali zal verantwoordelijk zijn voor het initiële stadium van de pagina. Hij zorgt ervoor dat de animatie goed getimed is en dat er ruimte is voor de functionaliteit van Kevin. Bovendien is hij verantwoordelijk voor de responsiviteit op dit gebied.</p>
+## 25/03/2024
+<p>Maandag begon ik direct aan het schrijven van de HTML. Ik had al een goed beeld voor hoe het logo in beeld zou moeten komen aan de hand van animaties. Ik deelde <b>CSS</b> en <b>Day</b> door twee, en daar tussen zou dan de slotmachine komen waar Kevin aan werkte. Aan het begin liep alles nog soepel maar ik wilde het ook graag responsive hebben dus veranderde ik <b>display: flex</b> naar <b>display: grid</b></p>.
+
+
 
 ## Kevin
 
@@ -76,4 +79,97 @@ Vandaag ging eigenlijk alles wel goed, we hebben aan het eind van de dag al het 
 Donderdag was het vooral de puntjes op de i. Ik was eerst bezig met wat kleine aanpassingen te maken aan de lay-out en vervolgens heb ik ervoor gezorgd dat wanneer je de hendel naar beneden trekt, deze automatisch naar het onderste gedeelte gaat. Daarna heb ik samen met Ali zijn deel met het mijne gemerged.
 
 
+## Bart 
 
+### 25/03/2024
+Ik kreeg als taak het fetchen van de data en deze sorteren om jaar en landen.
+ 
+Wat ik gedaan heb
+Alle data laden
+ 
+### Ik heb via JavaScript een fetch gedaan om alle data van het externe JSON bestand in te laden. Dit is gelukt.
+```js
+fetch('https://cssday.nl/data/speakers.json')
+    .then(response => response.json())
+    .then(data => {
+        allData = data
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error)
+    })
+```
+Een jaartal selecteren op land of/en jaartal
+### Ik kan alle data filteren op jaartal of land
+```html
+<label for="year-select">Filter by Year:</label>
+    <select id="year-select">
+      <option value="">Alles</option>
+      <option value="2013">2013</option>
+      <option value="2014">2014</option>
+      <option value="2015">2015</option>
+      <option value="2016">2016</option>
+      <option value="2017">2017</option>
+      <option value="2018">2018</option>
+      <option value="2019">2019</option>
+      <option value="2022">2022</option>
+      <option value="2023">2023</option>
+      <option value="2024">2024</option>
+    </select>
+```
+ 
+### 26/03/2024
+Mijn doel voor vandaag is dat ik alleen de landen te zien wil hebben van het jaartal dat geselecteerd is. Ook wil ik de lijst van de personages dynamisch inladen met alleen bepaalde gegevens
+lijst maken van de personen (ul)
+persoon komt in een (li)
+naam(h2)
+const speakerYear = document.createElement("h1");
+foto (img)
+titel (h3)
+description (p)
+ 
+```js
+const speakersList = document.createElement('ul');
+        data.forEach(speaker => {
+            const speakerItem = document.createElement('li');
+            let speakerDetails = speaker.name;
+            if (speaker.talk && speaker.talk.title) { // Adjusted to access the title property
+                speakerDetails += ` - "${speaker.talk.title}"`; // Using the title
+            }
+            // If there are other properties you wish to display, access them similarly
+            speakerItem.textContent = speakerDetails;
+            speakersList.appendChild(speakerItem);
+        });
+```
+ 
+### 27/03/2024
+Svg kleur veranderen blij klik door de kleur van het jaar
+ 
+```js
+document.getElementById('year-select').addEventListener('change', () => {
+        const selectedYear = document.getElementById('year-select').value;
+        const fill = yearColors[selectedYear];
+        document.querySelectorAll('svg').forEach(svg => {
+            svg.style.fill = fill;
+        });
+ 
+```
+Bij een nieuwe klik gaat de kleur weg en komt deze erna weer terug met een box shadow
+ 
+```js
+svgAnimation.forEach(path => {
+        path.classList.remove('new-color')
+    })
+ 
+setTimeout(() => {
+        document.documentElement.style.setProperty('--svg-color', colours[randomYear.index])
+ 
+        svgAnimation.forEach(path => {
+            path.classList.add('new-color')
+ 
+        })
+    }, 1000)
+```
+
+### 28/03/2024
+Mergen
+Aan het einde van de dag zijn we alle 4 de codes van iedereen gaan mergen
