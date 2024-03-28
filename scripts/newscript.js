@@ -1,5 +1,6 @@
 const countrySlot  = document.getElementById('countrySlot')
 const yearSlot     = document.getElementById('yearSlot')
+const viewSlot     = document.getElementById('viewSlot')
 const svgAnimation = document.querySelectorAll('svg path')
 let allData
 let countries
@@ -20,16 +21,26 @@ fetch('https://cssday.nl/data/speakers.json')
     })
 
 const countryImageArray = [
-    './assets/images/yearbadges/2013.svg',
-    './assets/images/yearbadges/2014.svg',
-    './assets/images/yearbadges/2015.svg',
-    './assets/images/yearbadges/2016.svg',
-    './assets/images/yearbadges/2017.svg',
-    './assets/images/yearbadges/2018.svg',
-    './assets/images/yearbadges/2019.svg',
-    './assets/images/yearbadges/2022.svg',
-    './assets/images/yearbadges/2023.svg',
-    './assets/images/yearbadges/2024.svg'
+    './assets/images/countrybadges/es.svg',
+    './assets/images/countrybadges/us.svg',
+    './assets/images/countrybadges/ca.svg',
+    './assets/images/countrybadges/nl.svg',
+    './assets/images/countrybadges/de.svg',
+    './assets/images/countrybadges/uk.svg',
+    './assets/images/countrybadges/fr.svg',
+    './assets/images/countrybadges/lb.svg',
+    './assets/images/countrybadges/be.svg',
+    './assets/images/countrybadges/at.svg',
+    './assets/images/countrybadges/pt.svg',
+    './assets/images/countrybadges/il.svg',
+    './assets/images/countrybadges/se.svg',
+    './assets/images/countrybadges/lu.svg',
+    './assets/images/countrybadges/jp.svg',
+    './assets/images/countrybadges/no.svg',
+    './assets/images/countrybadges/sg.svg',
+    './assets/images/countrybadges/ng.svg',
+    './assets/images/countrybadges/ro.svg',
+    './assets/images/countrybadges/gr.svg',
 ]
 
 const yearImageArray = [
@@ -68,7 +79,8 @@ const createList = (array, container, imageArray) => {
     let list = document.createElement('ul')
 
     array.forEach((item, index) => {
-        let li         = document.createElement('li')
+        let li = document.createElement('li')
+
 
         let img = document.createElement('img')
 
@@ -84,14 +96,19 @@ const createList = (array, container, imageArray) => {
 }
 
 // UPDATE THE LIST ITEMS FROM FILTERED ITEMS
-const updateList = (array, container) => {
+const updateList = (array, container, imageArray) => {
     container.innerHTML = ''
     let list            = document.createElement('ul')
 
-    array.forEach((item) => {
+    array.forEach((item, index) => {
         let li = document.createElement('li')
 
-        li.textContent = item
+        let img = document.createElement('img')
+
+        img.src = imageArray[index]
+        img.alt = item
+
+        li.appendChild(img)
 
         list.appendChild(li)
     })
@@ -114,7 +131,6 @@ lever.addEventListener('click', () => {
 
     document.getElementById('speakers-container').innerHTML = ''
 
-
     svgAnimation.forEach(path => {
         path.classList.remove('new-color')
     })
@@ -126,21 +142,25 @@ lever.addEventListener('click', () => {
 
     const randomYear = getRandomItem(years)
 
-    const yearContainer = document.getElementById('titleYear')
+    const yearContainer     = document.getElementById('titleYear')
     yearContainer.innerHTML = ''
-    const speakerYear = document.createElement("h1");
-    speakerYear.textContent = randomYear.value;
+    const speakerYear       = document.createElement('h1')
+    speakerYear.textContent = randomYear.value
 
-    yearContainer.appendChild(speakerYear);
+    yearContainer.appendChild(speakerYear)
 
     const speakersForYear = allData.filter(speaker => speaker.edition && speaker.edition.year === parseInt(randomYear.value))
 
     const availableCountries = [...new Set(speakersForYear.map(speaker => speaker.country))]
 
-    updateList(availableCountries, countrySlot)
+    console.log(availableCountries)
+
+    updateList(availableCountries, countrySlot, countryImageArray)
 
     const randomCountry             = getRandomItem(availableCountries)
     const speakersForYearAndCountry = speakersForYear.filter(speaker => speaker.country === randomCountry.value)
+
+    console.log(speakersForYearAndCountry)
 
     // Adding a slight delay to ensure the class removal is processed before re-adding it.
     setTimeout(() => {
@@ -154,6 +174,7 @@ lever.addEventListener('click', () => {
 
     spinSlot(yearSlot, randomYear.index)
     spinSlot(countrySlot, randomCountry.index)
+    spinSlot(viewSlot, randomYear.index)
 
     document.body.setAttribute('style', 'height: 100%; margin-top: 5rem; margin-bottom: 10rem;')
     document.documentElement.style.setProperty('--svg-color', colours[randomYear.index])
@@ -200,20 +221,20 @@ const displaySpeakers = (data) => {
 
             const speakerItem = document.createElement('li')
 
-            const speakerInfo = document.createElement('div')
+            const speakerInfo    = document.createElement('div')
             const speakerSubject = document.createElement('div')
-            const speakerStats = document.createElement('div')
+            const speakerStats   = document.createElement('div')
 
-            const speakerStatsList = document.createElement('ul')
+            const speakerStatsList      = document.createElement('ul')
             const speakerStatsListItem1 = document.createElement('li')
             const speakerStatsListItem2 = document.createElement('li')
             const speakerStatsListItem3 = document.createElement('li')
             const speakerStatsListItem4 = document.createElement('li')
 
-            const speakerYear = document.createElement('h1')
+            const speakerYear       = document.createElement('h1')
             speakerYear.textContent = speaker.edition.year
 
-            const speakerName = document.createElement('h2')
+            const speakerName       = document.createElement('h2')
             speakerName.textContent = speaker.name
 
             const avatarImage = document.createElement('img')
@@ -226,26 +247,26 @@ const displaySpeakers = (data) => {
             const speakerDesc       = document.createElement('p')
             speakerDesc.textContent = speaker.talk.description
 
-            const speakerDayTitle = document.createElement('h2')
-            speakerDayTitle.innerHTML = "Day"
-            const speakerDayNum = document.createElement('p')
+            const speakerDayTitle     = document.createElement('h2')
+            speakerDayTitle.innerHTML = 'Day'
+            const speakerDayNum       = document.createElement('p')
             speakerDayNum.textContent = speaker.day
 
-            const speakerViewsTitle = document.createElement('h2')
-            speakerViewsTitle.innerHTML = "Views"
-            const speakerViewsNum = document.createElement('p')
+            const speakerViewsTitle     = document.createElement('h2')
+            speakerViewsTitle.innerHTML = 'Views'
+            const speakerViewsNum       = document.createElement('p')
             speakerViewsNum.textContent = speaker.talk.video.views
 
-            const speakerLikesTitle = document.createElement('h2')
-            speakerLikesTitle.innerHTML = "Likes"
-            const speakerLikesNum = document.createElement('p')
+            const speakerLikesTitle     = document.createElement('h2')
+            speakerLikesTitle.innerHTML = 'Likes'
+            const speakerLikesNum       = document.createElement('p')
             speakerLikesNum.textContent = speaker.talk.video.likes
 
-            const speakerWatchTitle = document.createElement('h2');
-            speakerWatchTitle.innerHTML = "Watch";
-            const speakerWatchNum = document.createElement('a');
-            speakerWatchNum.setAttribute('href', speaker.talk.video['youtube-link']);
-            speakerWatchNum.textContent = 'Video';
+            const speakerWatchTitle     = document.createElement('h2')
+            speakerWatchTitle.innerHTML = 'Watch'
+            const speakerWatchNum       = document.createElement('a')
+            speakerWatchNum.setAttribute('href', speaker.talk.video['youtube-link'])
+            speakerWatchNum.textContent = 'Video'
 
             speakersList.appendChild(speakerItem)
             speakerItem.appendChild(speakerInfo)
