@@ -47,14 +47,33 @@
 ## Ali 
 <p>Ali zal verantwoordelijk zijn voor het initiële stadium van de pagina. Hij zorgt ervoor dat de animatie goed getimed is en dat er ruimte is voor de functionaliteit van Kevin. Bovendien is hij verantwoordelijk voor de responsiviteit op dit gebied.</p>
 
+## Kevin
 
 <img width="400" src="https://github.com/AliAhmed205/hackathon2324/assets/118130116/7ce1b21c-de34-4485-bd96-7fafc1e53e07">
 
-## Kevin's prototype 
-
-
 https://github.com/AliAhmed205/hackathon2324/assets/118130116/40f62938-c401-4f05-8a66-6c7e1122c004
 
+## 25/03/2024
+Maandag hield ik mij vooral bezig met het bedenken en schetsen van ideeën die in ons opkwamen, om zo visueel te zien hoe het eruit kwam te zien. Daarnaast keken we door de data om te zoeken naar interessante invalshoeken. Ook was ik maandag bezig met het proberen om de slotmachine 3D te maken en heb ik de lever die de slotmachine deed draaien gemaakt.
+
+### Waar liep ik tegenaan?
+Het 3D maken van de slotmachine was nog niet zo gemakkelijk om te doen. Met een eerder voorbeeld dat Sanne had gemaakt tijdens de les probeerde ik dit, maar het vervelende was dat niet elke "slot" dezelfde aantal items erin kon hebben zitten. Er waren bijvoorbeeld 20 landen en maar 10 kleuren. Daardoor hebben we het 3D maken van de slotmachine een beetje laten vallen en hebben we eerst gefocust op het maken van een "platte" slotmachine.
+
+## 26/03/2024
+Dinsdag begon ik toch nog eens een keer om de slotmachine 3D te maken. Ik kwam dit keer verder maar toch tegen problemen aan waardoor ik te veel tijd kwijtraakte. Ik heb voor het proces ook nog even een XD prototype opgezet zodat de werking duidelijk was wat we wilden bereiken. In de middag heb ik Ali en mijn branche gemerged waardoor het "bovenste gedeelte" van ons idee al aardig af was.
+
+### Waar liep ik tegenaan?
+Nadat ik de merge met Ali en mijn Branche had gedaan, kregen we wat problemen met het schalen van de slotmachine, hij moest wel responsive zijn! Hierdoor had ik Sanne nog om hulp gevraagd en die heeft een andere opzet gemaakt van hoe je de slotmachine random kunt laten draaien waardoor de responsiviteit met CSS kon worden opgelost. Leertip: Laat CSS de berekening doen en niet met JS gaan stylen. Daarna nog wat merge probleempjes gehad met de "main" branche maar gelukkig kon Tristan me daarbij helpen. Had achteraf niet gehoeven, want had het blijkbaar wel goed gedaan alleen iets over het hoofd gezien.
+
+## 27/03/2024
+<p>Woensdag was ik bezig met nog wat kleine tweaks aan het "bovenste gedeelte" van de slotmachine en met het maken van eigen icoontjes voor in de slotmachine. In de middag heb ik Bart geholpen met het animeren van het Logo van CSS Day. Bij iedere keer dat je de slotmachine laat draaien willen we namelijk de kleur die bij dat jaar past. En daarna heb ik Ali geholpen om zijn lay-out van het "onderste gedeelte" over te zetten naar zijn eigen branche.</p>
+<img width="700" src="https://github.com/AliAhmed205/hackathon2324/assets/118130116/acbe8671-eece-49cf-96ed-71c925416575">
+
+### Waar liep ik tegenaan?
+Vandaag ging eigenlijk alles wel goed, we hebben aan het eind van de dag al het werk samen gemerged wat wel voor wat merge conflicts zorgde maar die hebben we opgelost en nu werkt het zoals bedoeld.
+
+## 28/03/2024
+Donderdag was het vooral de puntjes op de i. Ik was eerst bezig met wat kleine aanpassingen te maken aan de lay-out en vervolgens heb ik ervoor gezorgd dat wanneer je de hendel naar beneden trekt, deze automatisch naar het onderste gedeelte gaat. Daarna heb ik samen met Ali zijn deel met het mijne gemerged.
 
 
 
